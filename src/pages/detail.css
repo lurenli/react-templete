@@ -1,0 +1,15 @@
+.toback{
+    margin-top:30px;
+    display: inline-block;
+    font-size:25px;
+}
+.info{
+    margin-top:15px;
+}
+.img{
+    width:150px;
+    height:80px;
+    object-fit: cover;
+    vertical-align:middle;
+    margin-right:10px;
+}
