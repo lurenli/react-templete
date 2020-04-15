@@ -11,7 +11,13 @@ class Index extends Component {
   static childContextTypes = {
     store: PropTypes.object
   }
+  constructor(props) {
+    super(props);
+    this.state = {
+        header:'头部传值'
+    };
 
+}
   getChildContext() {
     return { store }
   }
@@ -25,7 +31,7 @@ class Index extends Component {
       <div>
         <a href='/detail'>去detail</a>
         <button onClick={this.Todeatil.bind(this)}>通过函数跳转</button>
-        <Header a="表头" />
+        <Header a="表头" header={this.state.header} />
         <Main />
         <Footer />
       </div>

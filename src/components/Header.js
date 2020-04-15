@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import store from '../store/index'
 class Header extends Component {
-  constructor() {
-    super()
-    this.state = { headerShow: false, themeColor: '' }
+  constructor(props) {
+    super(props)
+    this.state = {
+       headerShow: false, 
+       themeColor: '' ,
+       header:props.header
+    }
+    
   }
 
   handleClickOnTitle(value, e) {
@@ -41,7 +46,7 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <div style={{ color: this.state.themeColor }} onClick={this.handleClickOnTitle.bind(this, '头部')}>头部 {this.state.headerShow ? '很好' : '不好'}</div>
+        <div style={{ color: this.state.themeColor }} onClick={this.handleClickOnTitle.bind(this, '头部')}>头部 {this.state.headerShow ? '很好' : '不好'} {this.state.header}</div>
       </div>
     )
   }
