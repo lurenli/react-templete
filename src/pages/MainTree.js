@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import store from '../store/index'
+import { addToCart } from '../store/actions/cart-action';
+
 class MainTree extends Component {
   static contextTypes = {
     store: PropTypes.object
@@ -12,23 +14,28 @@ class MainTree extends Component {
   }
 
   componentWillMount() {
-    this._updateThemeColor()
-    store.subscribe(() => this._updateThemeColor())
-  }
+    this.defaultcolor()
 
-  _updateThemeColor() {
+    //  随时监听 store  的 state
+    store.subscribe(() => {
+      this.defaultcolor()
+    })
+  }
+  defaultcolor() {
     const state = store.getState()
-    this.setState({ themeColor: state.themeColor })
+    console.log(state)
+    this.setState({ themeColor: state.cartReducer.color })
   }
-
   // dispatch action 去改变颜色
   handleSwitchColor(color) {
+    console.log(store)
+    //dispath  分发 action
+    store.dispatch(addToCart(color));
     // console.log(store)
-    // const { store } = this.context
-    store.dispatch({
-      type: 'CHANGE_COLOR',
-      themeColor: color
-    })
+    // store.dispatch({
+    //   type: 'CHANGE_COLOR',
+    //   themeColor: color
+    // })
   }
 
   render() {

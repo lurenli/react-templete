@@ -14,7 +14,9 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        header:'头部传值'
+        header:'头部传值',
+        fathValue:'父组件传值',
+        msg:'',
     };
 
 }
@@ -26,13 +28,24 @@ class Index extends Component {
       pathname: '/detail',
     });
   }
+  textInpuf = ()=>{
+    console.log(this.refs.button)
+  }
+  onSend = (msg)=>{
+    console.log(msg)
+    this.setState({
+      msg:msg
+    })
+  }
   render() {
     return (
       <div>
         <a href='/detail'>去detail</a>
-        <button onClick={this.Todeatil.bind(this)}>通过函数跳转</button>
+        <button onClick={this.Todeatil.bind(this)} ref="button">通过函数跳转</button>
         <Header a="表头" header={this.state.header} />
-        <Main />
+        <input onInput={this.textInpuf} />
+        <Main fathValue={this.state.fathValue} onSend={this.onSend}/>
+         { this.state.msg ?'子组件传过来的' + this.state.msg :''}
         <Footer />
       </div>
     )

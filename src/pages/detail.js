@@ -45,7 +45,7 @@ class detail extends React.Component {
 
         let listshow = list.map((item, index) => {
             return <li key={index} className="info">
-                <img className="img" src={CONFIG.baseImgDev + item.path + '?imageView2/1/w/54/h/72/format/jpg/q/80'} />
+                <img className="img" alt="" src={CONFIG.baseImgDev + item.path + '?imageView2/1/w/54/h/72/format/jpg/q/80'} />
                 <span>{item.worksName}</span>
             </li>
         })
