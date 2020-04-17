@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
 import store from '../store/index'
 class Header extends Component {
   constructor(props) {
@@ -17,22 +16,14 @@ class Header extends Component {
     this.setState({
       headerShow: !this.state.headerShow
     })
-
-    this.setState((prevState) => {
-      return { count: 0 }
-    })
-    this.setState((prevState) => {
-      return { count: prevState.count + 1 } // 上一个 setState 的返回是 count 为 0，当前返回 1
-    })
-    this.setState((prevState) => {
-      return { count: prevState.count + 2 } // 上一个 setState 的返回是 count 为 1，当前返回 3
-    })
   }
 
-  static contextTypes = {
-    store: PropTypes.object
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return
+    }
   }
-
+  
   componentWillMount() {
     this._updateThemeColor()
     store.subscribe(() => this._updateThemeColor())

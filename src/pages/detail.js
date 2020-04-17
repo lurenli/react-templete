@@ -6,7 +6,7 @@ import './detail.css';
 
 //导入本地图片
 // import image from "../assets/images/t01c38ff1a84f652273.webp.jpg"
-//   <img src={require("../assets/images/t01c38ff1a84f652273.webp.jpg")} alt=""></img>
+// <img src={require("../assets/images/t01c38ff1a84f652273.webp.jpg")} alt=""></img>
 
 class detail extends React.Component {
     constructor(props) {

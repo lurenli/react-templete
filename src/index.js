@@ -1,14 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import './index.css';
 import './reset.css';
 import App from './App.js';
 import * as serviceWorker from './serviceWorker';
+import moment from 'moment'
+import store from './store';
 
+React.Component.prototype.$moment = moment
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-    <App />,
+  <BrowserRouter>
+    <Provider store={store}>
+      <Route component={App} />
+    </Provider>
+  </BrowserRouter>,
+  // <App />,
   rootElement
 );
 

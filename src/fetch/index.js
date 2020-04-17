@@ -35,7 +35,6 @@ function checkStatus(response) {
 export default function request(options = {}) {
     let { data, url, method } = options
 
-    console.log(options)
     options = { ...options }
     options.mode = 'cors'//跨域
 
