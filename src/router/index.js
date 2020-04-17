@@ -14,7 +14,7 @@ const RouteConfig = (
     <Router path="/" history = {history}>
         <div>
             <Route path="/"  exact component={Index} />
-            <Route path="/detail" component={Detail} />
+            <Route path="/detail/:id" component={Detail} />
         </div>
     </Router>
 );

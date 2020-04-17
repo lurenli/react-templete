@@ -23,9 +23,9 @@ class Index extends Component {
   getChildContext() {
     return { store }
   }
-  Todeatil() {
+  Todeatil(idvalue) {
     this.props.history.push({
-      pathname: '/detail',
+      pathname: `/detail/${idvalue}`,
     });
   }
   textInpuf = ()=>{
@@ -40,13 +40,12 @@ class Index extends Component {
   render() {
     return (
       <div>
-        <a href='/detail/100'>去detail</a>
-        <button onClick={this.Todeatil.bind(this)} ref="button">通过函数跳转</button>
+        <a href='/detail/56'>去detail</a>
+        <button onClick={this.Todeatil.bind(this,12)} ref="button">通过函数跳转</button>
         <Header a="表头" header={this.state.header} />
         <input onInput={this.textInpuf} />
         <Main fathValue={this.state.fathValue} onSend={this.onSend}/>
          { this.state.msg ?'子组件传过来的' + this.state.msg :''}
-          123
         <Footer />
       </div>
     )
