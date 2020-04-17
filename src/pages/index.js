@@ -40,7 +40,7 @@ class Index extends Component {
   render() {
     return (
       <div>
-        <a href='/detail'>去detail</a>
+        <a href='/detail/100'>去detail</a>
         <button onClick={this.Todeatil.bind(this)} ref="button">通过函数跳转</button>
         <Header a="表头" header={this.state.header} />
         <input onInput={this.textInpuf} />
