@@ -46,6 +46,7 @@ class Index extends Component {
         <input onInput={this.textInpuf} />
         <Main fathValue={this.state.fathValue} onSend={this.onSend}/>
          { this.state.msg ?'子组件传过来的' + this.state.msg :''}
+          123
         <Footer />
       </div>
     )
