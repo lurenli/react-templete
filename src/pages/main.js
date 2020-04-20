@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import store from '../store/index'
 import MainTree from './MainTree.js'
+import './main.css'
 import ReactReduxTemplete from './react-redux-templete'
 
 // 生命周期
@@ -23,16 +24,13 @@ import ReactReduxTemplete from './react-redux-templete'
 // 编写模板更加简单快速
 // 更加直观，可读性高
 
-
-
-
+var timer
 const users = [
   { username: 'Jerry', age: 21, gender: 'male' },
   { username: 'Tomy', age: 22, gender: 'male' },
   { username: 'Lily', age: 19, gender: 'female' },
   { username: 'Lucy', age: 20, gender: 'female' }
 ]
-var timer
 class Main extends Component {
   static contextTypes = {
     store: PropTypes.object
@@ -41,7 +39,15 @@ class Main extends Component {
   constructor(props) {
     super(props)
     this.onClickFirst = this.onClickFirst.bind(this) //第一种点击
-    this.state = { themeColor: '', time: '' }
+    this.state = {
+      themeColor: '', time: '',
+      headerArr: [
+        '点击我单独有样式变化1',
+        '点击我单独有样式变化2',
+        '点击我单独有样式变化3',
+      ],
+      activeIndex: 0
+    }
   }
 
   componentWillMount() {
@@ -60,10 +66,15 @@ class Main extends Component {
     let Time = this.$moment('2020/02/15').format('YYYY-MM-DD HH:mm:ss')
     console.log(Time)
   }
+
+  componentDidUpdate(prevProps,prevState, snapshot) {
+    // 典型用法（不要忘记比较 props）：
+    // if (this.props.userID !== prevProps.userID) {
+    // }
+  }
+
   componentWillUnMount = () => {
-    this.setState = (state, callback) => {
-      return
-    }
+    clearInterval(timer)
   }
   TimeFunction() {
     let now = new Date()
@@ -86,7 +97,11 @@ class Main extends Component {
   onClickFirst() { //  第一种点击写法 
     console.log('第一种我被点了')
   }
-  onClickList() {  //  第二种点击写法 第四种点击写法 
+  onClickList(value,event) {  //  第二种点击写法 第四种点击写法 
+    console.log(value)
+    console.log(event)
+
+    // event.target.style.background = 'red'
     console.log('第二种我被点了 或者 第四种我被点了')
   }
   onClick = () => { // 第三种点击箭头函数
@@ -95,14 +110,30 @@ class Main extends Component {
   onChildSend = () => {
     this.props.onSend('谢谢你的父极祝福！')
   }
+  activeClicK(index,event) {
+    console.log(event)
+    this.setState({
+      activeIndex:index
+    })
+  }
   render() {
+    let { headerArr } = this.state
     return (
       <div className="main">
         <h1>{this.state.time}</h1>
+        {
+          headerArr.map((item, index) => {
+            return <div key={index}  onClick={this.activeClicK.bind(this, index)} className={`${this.state.activeIndex === index ? 'activeIndex' : ''}`}>
+              {item}
+            </div>
+          })
+        }
+
         <div onClick={this.onClickFirst} style={{ marginTop: 20 }}>第一种点我点我点我</div> {/*  第一种  里面的写法 */}
-        <div onClick={this.onClickList.bind(this)} style={{ marginTop: 20 }}>第二种点我点我点我</div> {/*  第二种  里面的写法  //  可传参数*/}
+        <div onClick={this.onClickList.bind(this,1)} style={{ marginTop: 20 }}>第二种点我点我点我</div> {/*  第二种  里面的写法  //  可传参数*/}
         <div onClick={this.onClick} style={{ marginTop: 20, marginBottom: 20 }}>第三种点我点我点我</div> {/*  第三种  里面的写法 */}
-        <div onClick={() => this.onClickList()} style={{ marginTop: 20, marginBottom: 20 }}>第四种点我点我点我</div> {/*  第四种  里面的写法 */}
+
+        <div onClick={(event) => this.onClickList("params",event)} style={{ marginTop: 20, marginBottom: 20 }}>第四种点我点我点我</div> {/*  第四种  里面的写法 */}
         <div style={{ color: this.state.themeColor }}>中间内容{users.map((item, index) => {
           return (
             <div key={index}>

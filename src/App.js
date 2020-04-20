@@ -7,7 +7,6 @@ import {
     Switch,
     Redirect
 } from 'react-router-dom';
-
 import asyncComponent from './components/AsyncComponent';
 import { Provider } from 'react-redux';
 import store from './store/index';
@@ -20,32 +19,35 @@ import Routers from './router/index';
 const NouFound = asyncComponent(() => import("./pages/notfound"));
 const createBrowserHistory = require("history").createBrowserHistory
 const history = createBrowserHistory();
+
 // 引入公共样式
 // import '@/css/common.css';
 
 class App extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            token: JSON.parse(localStorage.getItem('token')) ? true : false
+        }
     }
     render() {
-        let token = this.props.token
+        let {token} =this.props   //这是从外部 （App.js）中传过来的path和component，flag中的值
         return (
             <div>
                 <Provider store={store}>
-                    <Router  history={history}>
+                    <Router history={history}>
                         {/* <Router path="/" history={history}> */}
                         <Switch>
                             {Routers.map((item, index) => {
-                                return <Route key={index} path={item.path} exact render={props =>
-                                    (!item.auth ? (<item.component {...props} />) : (token ? <item.component {...props} /> : <Redirect to={{
-                                        pathname: '/login',
-                                        state: { from: props.location }
-                                    }} />)
-                                    )} />
+                             return <Route key={index} path={item.path} exact render={props =>
+                                (token ? (<item.component {...props} />) : (item.auth ? <item.component {...props} /> : <Redirect to={{
+                                    pathname: '/login',
+                                    state: { from: props.location }
+                                }} />)
+                                )} />
                             })}
                             {/*  所有错误路由跳转页面 */}
-                            <Route component={NouFound} />
+                            <Redirect component={NouFound} to='/404' />
                         </Switch>
                     </Router>
                     {/* {router} */} {/* 没有用到全局路由拦截的时候*/}
@@ -57,8 +59,9 @@ class App extends Component {
 
 // redux拿到token并挂载到App的props上面
 const mapStateToProps = (state, ownProps) => {
-    let token  = JSON.parse(localStorage.getItem('token'))
-    return {token}
+    let token = JSON.parse(localStorage.getItem('token'))
+    console.log(token)
+    return { token }
     // return { token: state.loginToken.token }
 }
 

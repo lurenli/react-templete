@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import store from '../store/index'
-
 const login_wrap = {
     width: '100%',
     textAlign: 'center',
@@ -10,9 +9,14 @@ const login_wrap = {
     height: '300px',
     lineHeight: '300px'
 }
+
+
 class login extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            addColor: true,
+        }
     }
     onLogin = () => {
         let token = '1344444445456454'
@@ -29,7 +33,9 @@ class login extends Component {
     }
     render() {
         return (
-            <div onClick={this.onLogin} style={login_wrap}>登录</div>
+            <div onClick={this.onLogin} style={login_wrap}>
+                <p className={`title ${this.state.addColor ? 'color' : null}`}>标题 登录</p>
+            </div>
         )
     }
 }

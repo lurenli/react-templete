@@ -8,13 +8,15 @@ import asyncComponent from '../components/AsyncComponent';
 const Index = asyncComponent(() => import("../pages/index"));
 const Detail = asyncComponent(() => import("../pages/detail"));
 const Login = asyncComponent(() => import("../pages/login"));
+const Notfound = asyncComponent(() => import("../pages/notfound"));
 // const history = createBrowserHistory();
 // react-router4中不支持直接从react-router中引用hashHistory等history对象。
 
 const Routers = [
-    { path: "/", name: "index", component: Index },
-    { path: "/login", name: "login", component: Login},
-    { path: "/detail/:id", name: "detail", component: Detail, auth:true },
+    { path: "/", name: "index", component: Index ,auth:false},
+    { path: "/login", name: "login", component: Login,auth:true},
+    { path: "/404", name: "notfound", component: Notfound,auth:true},
+    { path: "/detail/:id", name: "detail", component: Detail,auth:false },
 ]
 export default Routers
 
