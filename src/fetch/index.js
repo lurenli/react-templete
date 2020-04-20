@@ -1,7 +1,17 @@
 
 import  qs from 'qs';
 
-let commonUrl = 'https://www.guomanbang.com/spss'
+let commonUrl 
+
+
+// console.log(process.env.NODE_ENV ) 环境变量
+// process（进程）其实就是存在nodejs中的一个全局变量
+
+if(process.env.NODE_ENV === 'production'){
+    commonUrl = 'https://www.guomanbang.com/spss'
+}else{
+    commonUrl = 'http://192.168.8.7:8081/spss'
+}
 
 function formatUrl(url, params) {
     let flag = 0;
