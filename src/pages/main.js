@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import store from '../store/index'
 import MainTree from './MainTree.js'
-import './main.css'
+import './main.scss'
 import ReactReduxTemplete from './react-redux-templete'
 
 // 生命周期
@@ -124,7 +124,7 @@ class Main extends Component {
         {
           headerArr.map((item, index) => {
             return <div key={index}  onClick={this.activeClicK.bind(this, index)} className={`${this.state.activeIndex === index ? 'activeIndex' : ''}`}>
-              {item}
+              <span className="changeItem">{item}</span>
             </div>
           })
         }
