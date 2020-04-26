@@ -70,6 +70,14 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 
+react 16.8.0 是第一个支持 Hook 的版本 使你在无需修改组件结构的情况下复用状态逻辑 在非 class 的情况下可以使用更多的 React 特性
+import React, { useState } from 'react'; useState 方法是用来修改数据状态
+
+
 疑惑点 
 1.index.js:1 Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
 这种 警告错误 怎么 修改代码去除 ？？？
+
+
+<!-- https://www.cnblogs.com/ruoqiang/p/9759778.html  --> HOC 高级组件例子
+<!-- https://www.jianshu.com/p/882b1728c5d9 --> --> HOC 高级组件例子

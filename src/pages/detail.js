@@ -4,10 +4,23 @@ import CONFIG from '../config/index'
 import './detail.css';
 
 
+// import styles from './Button.module.css'; // 使用 CSS Modules 的方式引入
+//在 css 文件后面加 .module 后缀
+// import './another-stylesheet.css'; // 普通引入
+
+
+// key  唯一性 减少diff算法对比 最好用数据的id 具有唯一性
 //导入本地图片
 // import image from "../assets/images/t01c38ff1a84f652273.webp.jpg"
 // <img src={require("../assets/images/t01c38ff1a84f652273.webp.jpg")} alt=""></img>
 
+
+// React的自定义组件名为什么要首字母大写
+// 如果传递的是一个字符串，那么在创建虚拟DOM对象时，React会认为这是一个简单的HTML标签，但是这显然不是一个简单的HTML标签，因此去创建一个不存在的标签肯定是会报错的。
+// 如果首字母大写，那么就会当成一个变量传递进去，这个时候React会知道这是一个自定义组件，因此他就不会报错了
+
+
+// getDerivedStateFromProps 传入的props映射到state上面
 class detail extends React.Component {
     constructor(props) {
         super(props);
@@ -17,6 +30,16 @@ class detail extends React.Component {
         };
 
     }
+    // 在getDerivedStateFromProps中进行state的改变
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.type !== prevState.type) {
+            return {
+                type: nextProps.type,
+            };
+        }
+        return null;
+    }
+
     async componentDidMount() {
         let params = {
             currentPage: 1,
@@ -33,9 +56,9 @@ class detail extends React.Component {
         })
         console.log(this.state.list)
     }
-    databtn=(e)=>{
-        let target =e.srcElement||e.target;
-        let  res=target.getAttribute("data-id");
+    databtn = (e) => {
+        let target = e.srcElement || e.target;
+        let res = target.getAttribute("data-id");
         console.log(res);
     }
     render() {

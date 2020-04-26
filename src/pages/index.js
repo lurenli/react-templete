@@ -3,11 +3,18 @@ import './index.css';
 import Header from '../components/Header.js'
 import Footer from '../components/Footer.js'
 import Main from './main.js'
+import Hooks from './hooks.js'
+import Hoc from './hoc.js'
 // new Date().toLocaleTimeString()
-// props 一旦传入，你就不可以在组件内部对它进行修改。但是你可以通过父组件主动重新渲染的方式来传入新的 props，从而达到更新的效果。
+
+// props  内置参数 一旦传入，你就不可以在组件内部对它进行修改。但是你可以通过父组件主动重新渲染的方式来传入新的 props，从而达到更新的效果。
+// 只要存在constructor就必须调用super() 
+// 当你需要在constructor中访问this.props时，才需要设置super(props)
+
 class Index extends Component {
   constructor(props) {
     super(props);
+    console.log('props',props)
     this.state = {
       header: '头部传值',
       fathValue: '父组件传值',
@@ -50,7 +57,16 @@ class Index extends Component {
         {/* 新版本的React已经不推荐我们使用ref string转而使用ref callback */}
         <input onInput={this.textInpuf} ref={value => { this.refDom = value; }} />
         <Main fathValue={this.state.fathValue} onSend={this.onSend} />
-        {this.state.msg ? '子组件传过来的' + this.state.msg : ''}
+        {this.state.msg ? '子组件传过来的' + this.state.msg : ''} 
+
+        <h2 style={{color:'red',fontSize:25}}>react  新特性 hooks </h2>
+        <Hooks />
+        <br/>
+        <br/>
+
+        <Hoc />
+        <br/>
+        <br/>
         <Footer />
       </div>
     )
