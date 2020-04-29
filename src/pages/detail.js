@@ -3,6 +3,7 @@ import Listquest from '../request/Listquest'
 import CONFIG from '../config/index'
 import './detail.css';
 
+// import detail  from '@/pages/detail.css'
 
 // import styles from './Button.module.css'; // 使用 CSS Modules 的方式引入
 //在 css 文件后面加 .module 后缀
@@ -60,6 +61,11 @@ class detail extends React.Component {
         let target = e.srcElement || e.target;
         let res = target.getAttribute("data-id");
         console.log(res);
+
+        // 去除字符串内所有的空格：str = str.replace(/\s*/g, "");
+        // 去除字符串内两头的空格：str = str.replace(/^\s*|\s*$/g, "");
+        // 去除字符串内左侧的空格：str = str.replace(/^\s*/, "");
+        // 去除字符串内右侧的空格：str = str.replace(/(\s*$)/g, "");
     }
     render() {
         let { list, show } = this.state

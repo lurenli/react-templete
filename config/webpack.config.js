@@ -301,6 +301,8 @@ module.exports = function(webpackEnv) {
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
         ...(modules.webpackAliases || {}),
+        '@': paths.appSrc
+        // 在webpack.config.dev.js 和 webpack.config.prod.js 文件中搜索 alias 关键词，在相关对象中添加一个键值对：'@': paths.appSrc，此时的appSrc 就是项目的src目录
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

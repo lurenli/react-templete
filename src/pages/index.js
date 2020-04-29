@@ -14,19 +14,34 @@ import Hoc from './hoc.js'
 class Index extends Component {
   constructor(props) {
     super(props);
-    console.log('props',props)
+    console.log('props', props)
     this.state = {
       header: '头部传值',
       fathValue: '父组件传值',
       msg: '',
+      site:false,
     };
+    this.scroll = this.scroll.bind(this)
 
+  }
+  componentWillMount() {
+    window.addEventListener('scroll', this.scroll.bind(this));
   }
   componentDidMount() {
     // this.refDom.focus();
     // ref添加到Compoennt上获取的是Compoennt实例，添加到原生HTML上获取的是DOM；
     // ReactDOM.findDOMNode，当参数是DOM，返回值就是该DOM；当参数是Component获取的是该Component render方法中的DOM
     // 二者主要区别在ref绑定在组件上的时候，this.refs获取到的是组件实例，ReactDOM.findDOMNode获取到的是dom节点
+    window.addEventListener('scroll', this.scroll.bind(this));
+  }
+  scroll() {
+    const scrollTop = document.body.scrollTop;
+    const headerHeight = 100;
+    if (scrollTop >= headerHeight) {
+      this.setState({ site: true });
+    } else {
+      this.setState({ site: false });
+    }
   }
   Todeatil(idvalue) {
     this.props.history.push({
@@ -46,6 +61,7 @@ class Index extends Component {
     this.setState = (state, callback) => {
       return
     }
+    window.removeEventListener('scroll', this.scroll.bind(this));
   }
   render() {
     return (
@@ -57,16 +73,16 @@ class Index extends Component {
         {/* 新版本的React已经不推荐我们使用ref string转而使用ref callback */}
         <input onInput={this.textInpuf} ref={value => { this.refDom = value; }} />
         <Main fathValue={this.state.fathValue} onSend={this.onSend} />
-        {this.state.msg ? '子组件传过来的' + this.state.msg : ''} 
+        {this.state.msg ? '子组件传过来的' + this.state.msg : ''}
 
-        <h2 style={{color:'red',fontSize:25}}>react  新特性 hooks </h2>
+        <h2 style={{ color: 'red', fontSize: 25 }}>react  新特性 hooks </h2>
         <Hooks />
-        <br/>
-        <br/>
+        <br />
+        <br />
 
         <Hoc />
-        <br/>
-        <br/>
+        <br />
+        <br />
         <Footer />
       </div>
     )

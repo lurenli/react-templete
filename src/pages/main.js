@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import store from '../store/index'
-import MainTree from './MainTree.js'
+import MainTree from '@/pages/MainTree.js'
 import './main.scss'
 import ReactReduxTemplete from './react-redux-templete'
 
-// 生命周期
+// 生命周期 顺序
 // constructor() //坑死洽死特
 // componentWillMount()
 // render()
@@ -31,6 +31,26 @@ const users = [
   { username: 'Lily', age: 19, gender: 'female' },
   { username: 'Lucy', age: 20, gender: 'female' }
 ]
+// component 和 function
+
+// // ES5
+// var MyComponent = React.createClass({
+//   render: function() {
+//       return
+//           <h3>Hello Edureka!</h3>;
+//   }
+// });
+
+// // ES6
+// class MyComponent extends React.Component {
+//   render() {
+//       return
+//           <h3>Hello Edureka!</h3>;
+//   }
+
+// }
+
+// es6 component 
 class Main extends Component {
   static contextTypes = {
     store: PropTypes.object
